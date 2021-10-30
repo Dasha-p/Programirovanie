@@ -1,9 +1,9 @@
-'''importing random'''
+'''import random and typing'''
 import random
 import typing as tp
 
 
-def is_prime(n_n: int) -> bool:
+def is_prime(n: int) -> bool:
     """
     Tests to see if a number is prime.
 
@@ -14,23 +14,19 @@ def is_prime(n_n: int) -> bool:
     >>> is_prime(8)
     False
     """
-    if n_n == 2:
+    if n == 2:
         return True
-    elif n_n == 1:
+    elif n == 1:
         return False
-    if n_n % 2 == 0:
+    if n % 2 == 0:
         return False
-    d_d = 3
-    while d_d ** 2 <= n_n and n_n % d_d != 0:
-        d_d += 2
-    return d_d ** 2 > n_n
-    #pass
+    d = 3
+    while d ** 2 <= n and n % d != 0:
+        d += 2
+    return d ** 2 > n
 
 
-#print (is_prime(1))
-
-
-def gcd(a_a: int, b_b: int) -> int:
+def gcd(a: int, b: int) -> int:
     """
     Euclid's algorithm for determining the greatest common divisor.
 
@@ -39,13 +35,12 @@ def gcd(a_a: int, b_b: int) -> int:
     >>> gcd(3, 7)
     1
     """
-    while a_a != 0 and b_b != 0:
-        if a_a > b_b:
-            a_a = a_a % b_b
+    while a != 0 and b != 0:
+        if a > b:
+            a = a % b
         else:
-            b_b = b_b % a_a
-    return a_a + b_b
-    #pass
+            b = b % a
+    return a + b
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
@@ -65,14 +60,10 @@ def multiplicative_inverse(e: int, phi: int) -> int:
         y, yy = yy, y - yy * q
     k = x % w
     return k
-    #pass
-
-
-# print(multiplicative_inverse(7, 40))
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
-    '''test'''
+    '''pylint'''
     if not (is_prime(p) and is_prime(q)):
         raise ValueError("Both numbers must be prime.")
     elif p == q:
@@ -102,7 +93,7 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
 
 
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
-    '''aaaaaaa'''
+    '''pylint'''
     # Unpack the key into it's components
     key, n = pk
     # Convert each letter in the plaintext to numbers based on
@@ -113,7 +104,7 @@ def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
 
 
 def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
-    '''pylint отстой!!!'''
+    '''pylint'''
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
@@ -136,3 +127,4 @@ if __name__ == "__main__":
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
+

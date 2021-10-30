@@ -1,4 +1,4 @@
-'''импортирую тайпинг'''
+'''import type'''
 import typing as tp
 
 

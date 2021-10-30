@@ -1,4 +1,3 @@
-'''importing sth'''
 #import typing as tp
 
 
@@ -14,23 +13,23 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     'LXFOPVEFRNHR'
     """
     ciphertext = ""
-    a_a = 0
+    count = 0
     while len(plaintext) > len(keyword):
-        keyword += keyword[a_a]
-        a_a += 1
+        keyword += keyword[count]
+        count += 1
     for i, _ in enumerate(keyword):
         if keyword[i].isupper():
-            key = ord(keyword[i]) - 65
+            key = ord(keyword[i]) - ord('A')
         elif keyword[i].islower():
-            key = ord(keyword[i]) - 97
+            key = ord(keyword[i]) - ord('a')
         if plaintext[i].isalpha():
-            c_c = ord(plaintext[i])
-            if plaintext[i].isupper() and c_c >= 91 - key:
-                ciphertext += chr(c_c - 26 + key)
-            elif plaintext[i].islower() and c_c >= 123 - key:
-                ciphertext += chr(c_c - 26 + key)
+            chiselko = ord(plaintext[i])
+            if plaintext[i].isupper() and chiselko >= ord('Z') + 1 - key:
+                ciphertext += chr(chiselko - 26 + key)
+            elif plaintext[i].islower() and chiselko >= ord('z') + 1 - key:
+                ciphertext += chr(chiselko - 26 + key)
             else:
-                ciphertext += chr(c_c + key)
+                ciphertext += chr(chiselko + key)
         else:
             ciphertext += plaintext[i]
     return ciphertext
@@ -48,23 +47,24 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    a_b = 0
+    count = 0
     while len(ciphertext) > len(keyword):
-        keyword += keyword[a_b]
-        a_b += 1
+        keyword += keyword[count]
+        count += 1
     for i, _ in enumerate(keyword):
         if keyword[i].isupper():
-            key = ord(keyword[i]) - 65
+            key = ord(keyword[i]) - ord('A')
         elif keyword[i].islower():
-            key = ord(keyword[i]) - 97
+            key = ord(keyword[i]) - ord('a')
         if ciphertext[i].isalpha():
-            c_b = ord(ciphertext[i])
-            if ciphertext[i].isupper() and c_b <= 64 + key:
-                plaintext += chr(c_b + 26 - key)
-            elif ciphertext[i].islower() and c_b <= 96 + key:
-                plaintext += chr(c_b + 26 - key)
+            chiselko = ord(ciphertext[i])
+            if ciphertext[i].isupper() and chiselko <= 64 + key:
+                plaintext += chr(chiselko + 26 - key)
+            elif ciphertext[i].islower() and chiselko <= 96 + key:
+                plaintext += chr(chiselko + 26 - key)
             else:
-                plaintext += chr(c_b - key)
+                plaintext += chr(chiselko - key)
         else:
             plaintext += ciphertext[i]
     return plaintext
+
