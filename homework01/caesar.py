@@ -1,8 +1,7 @@
-'''importing sth'''
+'''импортирую тайпинг'''
 import typing as tp
 
 
-#comment to change sth
 def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """
     Encrypts plaintext using a Caesar cipher.
@@ -17,19 +16,20 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     chiphertext = ""
-    for i, _ in enumerate(plaintext) :
-        if plaintext[i].isalpha():
-            a_a = ord(plaintext[i])
-            if plaintext[i].isupper() and a_a >= 91 - shift:
-                chiphertext += chr(a_a - 26 + shift)
-            elif plaintext[i].islower() and a_a >= 123 - shift:
-                chiphertext += chr(a_a - 26 + shift)
+    for j, _ in enumerate(plaintext) :
+        if plaintext[j].isalpha():
+            chiselko = ord(plaintext[j])
+            if plaintext[j].isupper() and chiselko >= ord('Z') + 1 - shift:
+                chiphertext += chr(chiselko - 26 + shift)
+            elif plaintext[j].islower() and chiselko >= ord('z') + 1 - shift:
+                chiphertext += chr(chiselko - 26 + shift)
             else:
-                chiphertext += chr(a_a + shift)
+                chiphertext += chr(chiselko + shift)
         else:
-            chiphertext += plaintext[i]
+            chiphertext += plaintext[j]
     return chiphertext
 
+#print(encrypt_caesar("PYTHON"))
 
 def decrypt_caesar(chiphertext: str, shift: int = 3) -> str:
     """
@@ -45,21 +45,22 @@ def decrypt_caesar(chiphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    for i, _ in enumerate(chiphertext):
-        if chiphertext[i].isalpha():
-            a_a = ord(chiphertext[i])
-            if chiphertext[i].isupper() and a_a <= 64 + shift:
-                plaintext += chr(a_a + 26 - shift)
-            elif chiphertext[i].islower() and a_a <= 96 + shift:
-                plaintext += chr(a_a + 26 - shift)
+    for j, _ in enumerate(chiphertext):
+        if chiphertext[j].isalpha():
+            chiselko = ord(chiphertext[j])
+            if chiphertext[j].isupper() and chiselko <= ord('A') - 1 + shift:
+                plaintext += chr(chiselko + 26 - shift)
+            elif chiphertext[j].islower() and chiselko <= ord('a') - 1 + shift:
+                plaintext += chr(chiselko + 26 - shift)
             else:
-                plaintext += chr(a_a - shift)
+                plaintext += chr(chiselko - shift)
         elif chiphertext.isspace():
             continue
         else:
-            plaintext += chiphertext[i]
+            plaintext += chiphertext[j]
     return plaintext
 
+#print(decrypt_caesar("SBWKRQ"))
 
 def caesar_breaker_brute_force(chiphertext: str, dictionary: tp.Set[str]) -> int:
     """
@@ -68,3 +69,4 @@ def caesar_breaker_brute_force(chiphertext: str, dictionary: tp.Set[str]) -> int
     best_shift = 0
     # PUT YOUR CODE HERE
     return best_shift
+
