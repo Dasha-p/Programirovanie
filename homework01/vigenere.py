@@ -1,4 +1,4 @@
-#import typing as tp
+# import typing as tp
 
 
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
@@ -19,14 +19,14 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
         count += 1
     for i, _ in enumerate(keyword):
         if keyword[i].isupper():
-            key = ord(keyword[i]) - ord('A')
+            key = ord(keyword[i]) - ord("A")
         elif keyword[i].islower():
-            key = ord(keyword[i]) - ord('a')
+            key = ord(keyword[i]) - ord("a")
         if plaintext[i].isalpha():
             chiselko = ord(plaintext[i])
-            if plaintext[i].isupper() and chiselko >= ord('Z') + 1 - key:
+            if plaintext[i].isupper() and chiselko >= ord("Z") + 1 - key:
                 ciphertext += chr(chiselko - 26 + key)
-            elif plaintext[i].islower() and chiselko >= ord('z') + 1 - key:
+            elif plaintext[i].islower() and chiselko >= ord("z") + 1 - key:
                 ciphertext += chr(chiselko - 26 + key)
             else:
                 ciphertext += chr(chiselko + key)
@@ -53,9 +53,9 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         count += 1
     for i, _ in enumerate(keyword):
         if keyword[i].isupper():
-            key = ord(keyword[i]) - ord('A')
+            key = ord(keyword[i]) - ord("A")
         elif keyword[i].islower():
-            key = ord(keyword[i]) - ord('a')
+            key = ord(keyword[i]) - ord("a")
         if ciphertext[i].isalpha():
             chiselko = ord(ciphertext[i])
             if ciphertext[i].isupper() and chiselko <= 64 + key:
@@ -67,4 +67,3 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         else:
             plaintext += ciphertext[i]
     return plaintext
-

@@ -1,4 +1,4 @@
-'''import type'''
+"""import type"""
 import typing as tp
 
 
@@ -16,12 +16,12 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     chiphertext = ""
-    for j, _ in enumerate(plaintext) :
+    for j, _ in enumerate(plaintext):
         if plaintext[j].isalpha():
             chiselko = ord(plaintext[j])
-            if plaintext[j].isupper() and chiselko >= ord('Z') + 1 - shift:
+            if plaintext[j].isupper() and chiselko >= ord("Z") + 1 - shift:
                 chiphertext += chr(chiselko - 26 + shift)
-            elif plaintext[j].islower() and chiselko >= ord('z') + 1 - shift:
+            elif plaintext[j].islower() and chiselko >= ord("z") + 1 - shift:
                 chiphertext += chr(chiselko - 26 + shift)
             else:
                 chiphertext += chr(chiselko + shift)
@@ -29,7 +29,6 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
             chiphertext += plaintext[j]
     return chiphertext
 
-#print(encrypt_caesar("PYTHON"))
 
 def decrypt_caesar(chiphertext: str, shift: int = 3) -> str:
     """
@@ -48,9 +47,9 @@ def decrypt_caesar(chiphertext: str, shift: int = 3) -> str:
     for j, _ in enumerate(chiphertext):
         if chiphertext[j].isalpha():
             chiselko = ord(chiphertext[j])
-            if chiphertext[j].isupper() and chiselko <= ord('A') - 1 + shift:
+            if chiphertext[j].isupper() and chiselko <= ord("A") - 1 + shift:
                 plaintext += chr(chiselko + 26 - shift)
-            elif chiphertext[j].islower() and chiselko <= ord('a') - 1 + shift:
+            elif chiphertext[j].islower() and chiselko <= ord("a") - 1 + shift:
                 plaintext += chr(chiselko + 26 - shift)
             else:
                 plaintext += chr(chiselko - shift)
@@ -60,7 +59,6 @@ def decrypt_caesar(chiphertext: str, shift: int = 3) -> str:
             plaintext += chiphertext[j]
     return plaintext
 
-#print(decrypt_caesar("SBWKRQ"))
 
 def caesar_breaker_brute_force(chiphertext: str, dictionary: tp.Set[str]) -> int:
     """
@@ -69,4 +67,3 @@ def caesar_breaker_brute_force(chiphertext: str, dictionary: tp.Set[str]) -> int
     best_shift = 0
     # PUT YOUR CODE HERE
     return best_shift
-

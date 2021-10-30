@@ -1,4 +1,4 @@
-'''import random and typing'''
+"""import random and typing"""
 import random
 import typing as tp
 
@@ -51,28 +51,26 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    x, xx, y, yy = 1, 0, 0, 1
+    x, x1, y, y1 = 1, 0, 0, 1
     w = phi
     while phi:
         q = e // phi
         e, phi = phi, e % phi
-        x, xx = xx, x - xx * q
-        y, yy = yy, y - yy * q
+        x, x1 = x1, x - x1 * q
+        y, y1 = y1, y - y1 * q
     k = x % w
     return k
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
-    '''pylint'''
+    """pylint"""
     if not (is_prime(p) and is_prime(q)):
         raise ValueError("Both numbers must be prime.")
     elif p == q:
         raise ValueError("p and q cannot be equal")
 
-    # n = pq
     n = p * q
 
-    # phi = (p-1)(q-1)
     phi = (p - 1) * (q - 1)
 
     # Choose an integer e such that e and phi(n) are coprime
@@ -93,7 +91,7 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
 
 
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
-    '''pylint'''
+    """pylint"""
     # Unpack the key into it's components
     key, n = pk
     # Convert each letter in the plaintext to numbers based on
@@ -104,7 +102,7 @@ def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
 
 
 def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
-    '''pylint'''
+    """pylint"""
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
@@ -127,4 +125,3 @@ if __name__ == "__main__":
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
-
