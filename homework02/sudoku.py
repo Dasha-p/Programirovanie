@@ -217,16 +217,19 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """Если решение solution верно, то вернуть True, в противном случае False"""
     # TODO: Add doctests with bad puzzles
-    for i in range(0, 7, 3):
+    for i in range(0, 9):
         for j in range(0, 9, 1):
-            a = get_col(solution, (i, j))
-            b = get_row(solution, (i, j))
-            c = get_block(solution, (i, j))
-            d: List[str] = []
-            for e in c:
-                d.extend(e)
-            if len(set(a)) == len(a) and len(set(b)) == len(b) and len(set(d)) == len(d):
-                return True
+            if solution[i][j] == ".":
+                return False
+            if i%3 == 0 or i == 0:
+                a = get_col(solution, (i, j))
+                b = get_row(solution, (i, j))
+                c = get_block(solution, (i, j))
+                d: List[str] = []
+                for e in c:
+                    d.extend(e)
+                if len(set(a)) == len(a) and len(set(b)) == len(b) and len(set(d)) == len(d):
+                    return True
     return False
 
 
