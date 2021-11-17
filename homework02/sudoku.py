@@ -217,6 +217,7 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """Если решение solution верно, то вернуть True, в противном случае False"""
     # TODO: Add doctests with bad puzzles
+    var = False
     for i in range(0, 9):
         for j in range(0, 9, 1):
             if solution[i][j] == ".":
@@ -229,7 +230,13 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
                 for e in c:
                     d.extend(e)
                 if len(set(a)) == len(a) and len(set(b)) == len(b) and len(set(d)) == len(d):
-                    return True
+                   var = True
+                if var == False:
+                    break
+                else:
+                    continue
+    if var == True:
+        return True
     return False
 
 
