@@ -221,7 +221,7 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
         for j in range(0, 9, 1):
             if solution[i][j] == ".":
                 return False
-            if i%3 == 0 or i == 0:
+            if i % 3 == 0 or i == 0:
                 a = get_col(solution, (i, j))
                 b = get_row(solution, (i, j))
                 c = get_block(solution, (i, j))
