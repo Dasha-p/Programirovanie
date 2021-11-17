@@ -230,7 +230,7 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
                 for e in c:
                     d.extend(e)
                 if len(set(a)) == len(a) and len(set(b)) == len(b) and len(set(d)) == len(d):
-                   var = True
+                    var = True
                 if var == False:
                     break
                 else:
