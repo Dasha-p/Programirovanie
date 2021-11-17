@@ -264,13 +264,16 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
         for w in range(9):
             grid[q].append(".")
     solve(grid)
-    n = 81
-    while n != N:
-        a, b = random.randint(0, 8), random.randint(0, 8)
-        if grid[a][b] != ".":
-            grid[a][b] = "."
-            n -= 1
-    return grid
+    if N >= 81:
+        return grid
+    else:
+        n = 81
+        while n != N:
+            a, b = random.randint(0, 8), random.randint(0, 8)
+            if grid[a][b] != ".":
+                grid[a][b] = "."
+                n -= 1
+        return grid
 
 
 if __name__ == "__main__":
