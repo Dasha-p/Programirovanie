@@ -1,3 +1,4 @@
+"""import random and typing"""
 import random
 import typing as tp
 
@@ -5,6 +6,7 @@ import typing as tp
 def is_prime(n: int) -> bool:
     """
     Tests to see if a number is prime.
+
     >>> is_prime(2)
     True
     >>> is_prime(11)
@@ -22,15 +24,12 @@ def is_prime(n: int) -> bool:
     while d ** 2 <= n and n % d != 0:
         d += 2
     return d ** 2 > n
-    pass
-
-
-# print (is_prime(1))
 
 
 def gcd(a: int, b: int) -> int:
     """
     Euclid's algorithm for determining the greatest common divisor.
+
     >>> gcd(12, 15)
     3
     >>> gcd(3, 7)
@@ -42,41 +41,36 @@ def gcd(a: int, b: int) -> int:
         else:
             b = b % a
     return a + b
-    pass
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
     """
     Euclid's extended algorithm for finding the multiplicative
     inverse of two numbers.
+
     >>> multiplicative_inverse(7, 40)
     23
     """
-    x, xx, y, yy = 1, 0, 0, 1
+    x, x1, y, y1 = 1, 0, 0, 1
     w = phi
     while phi:
         q = e // phi
         e, phi = phi, e % phi
-        x, xx = xx, x - xx * q
-        y, yy = yy, y - yy * q
+        x, x1 = x1, x - x1 * q
+        y, y1 = y1, y - y1 * q
     k = x % w
     return k
-    pass
-
-
-# print(multiplicative_inverse(7, 40))
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
+    """pylint"""
     if not (is_prime(p) and is_prime(q)):
         raise ValueError("Both numbers must be prime.")
     elif p == q:
         raise ValueError("p and q cannot be equal")
 
-    # n = pq
     n = p * q
 
-    # phi = (p-1)(q-1)
     phi = (p - 1) * (q - 1)
 
     # Choose an integer e such that e and phi(n) are coprime
@@ -97,6 +91,7 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
 
 
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
+    """pylint"""
     # Unpack the key into it's components
     key, n = pk
     # Convert each letter in the plaintext to numbers based on
@@ -107,6 +102,7 @@ def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
 
 
 def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
+    """pylint"""
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
