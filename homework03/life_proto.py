@@ -1,7 +1,7 @@
 import copy
 import random
 import typing as tp
-from typing import List, Any
+from typing import Any,List
 
 import pygame
 from pygame.locals import *
@@ -12,7 +12,7 @@ Grid = tp.List[Cells]
 
 
 class GameOfLife:
-    grid: list[Any]
+    grid: tp.List[Any]
 
     def __init__(
         self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10
