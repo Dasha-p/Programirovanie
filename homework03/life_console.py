@@ -27,8 +27,8 @@ class Console(UI):
         curses.resizeterm(self.life.rows + 2, self.life.cols + 2)
         while self.life.is_changing and not self.life.is_max_generations_exceeded:
             self.life.step()
-            self.draw_borders()
-            self.draw_borders()
+            self.draw_borders(screen)
+            self.draw_grid(screen)
             screen.refresh()
             curses.napms(300)
         curses.endwin()

@@ -1,6 +1,7 @@
 import copy
 import random
 import typing as tp
+from typing import List, Any
 
 import pygame
 from pygame.locals import *
@@ -11,6 +12,8 @@ Grid = tp.List[Cells]
 
 
 class GameOfLife:
+    grid: list[Any]
+
     def __init__(
         self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10
     ) -> None:
@@ -52,7 +55,7 @@ class GameOfLife:
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
             self.draw_grid()
             self.draw_lines()
