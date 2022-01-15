@@ -1,7 +1,7 @@
 import copy
 import random
 import typing as tp
-from typing import Any,List
+from typing import Any, List
 
 import pygame
 from pygame.locals import *
