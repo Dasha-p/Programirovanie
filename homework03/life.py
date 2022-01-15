@@ -47,25 +47,61 @@ class GameOfLife:
         y, x = cell
         sosedi = []
         if x == 0 and y == 0:
-            sosedi = [self.curr_generation[y][x + 1], self.curr_generation[y + 1][x], self.curr_generation[y + 1][x + 1]]
+            sosedi = [
+                self.curr_generation[y][x + 1],
+                self.curr_generation[y + 1][x],
+                self.curr_generation[y + 1][x + 1],
+            ]
         if 0 < x < len(self.curr_generation[0]) - 1 and y == 0:
-            sosedi = [self.curr_generation[y][x + 1], self.curr_generation[y + 1][x], self.curr_generation[y + 1][x + 1], self.curr_generation[y][x - 1],
-                      self.curr_generation[y + 1][x - 1]]
+            sosedi = [
+                self.curr_generation[y][x + 1],
+                self.curr_generation[y + 1][x],
+                self.curr_generation[y + 1][x + 1],
+                self.curr_generation[y][x - 1],
+                self.curr_generation[y + 1][x - 1],
+            ]
         if x == len(self.curr_generation[0]) - 1 and y == 0:
-            sosedi = [self.curr_generation[y][x - 1], self.curr_generation[y + 1][x], self.curr_generation[y + 1][x - 1]]
+            sosedi = [
+                self.curr_generation[y][x - 1],
+                self.curr_generation[y + 1][x],
+                self.curr_generation[y + 1][x - 1],
+            ]
         if 0 < x < len(self.curr_generation[0]) - 1 and y == len(self.curr_generation) - 1:
-            sosedi = [self.curr_generation[y][x + 1], self.curr_generation[y - 1][x], self.curr_generation[y - 1][x + 1], self.curr_generation[y][x - 1],
-                      self.curr_generation[y - 1][x - 1]]
+            sosedi = [
+                self.curr_generation[y][x + 1],
+                self.curr_generation[y - 1][x],
+                self.curr_generation[y - 1][x + 1],
+                self.curr_generation[y][x - 1],
+                self.curr_generation[y - 1][x - 1],
+            ]
         if x == 0 and y == len(self.curr_generation) - 1:
-            sosedi = [self.curr_generation[y][x + 1], self.curr_generation[y - 1][x], self.curr_generation[y - 1][x + 1]]
+            sosedi = [
+                self.curr_generation[y][x + 1],
+                self.curr_generation[y - 1][x],
+                self.curr_generation[y - 1][x + 1],
+            ]
         if x == len(self.curr_generation[0]) - 1 and y == len(self.curr_generation) - 1:
-            sosedi = [self.curr_generation[y][x - 1], self.curr_generation[y - 1][x], self.curr_generation[y - 1][x - 1]]
+            sosedi = [
+                self.curr_generation[y][x - 1],
+                self.curr_generation[y - 1][x],
+                self.curr_generation[y - 1][x - 1],
+            ]
         if x == 0 and 0 < y < len(self.curr_generation) - 1:
-            sosedi = [self.curr_generation[y][x + 1], self.curr_generation[y + 1][x], self.curr_generation[y + 1][x + 1], self.curr_generation[y - 1][x],
-                      self.curr_generation[y - 1][x + 1]]
+            sosedi = [
+                self.curr_generation[y][x + 1],
+                self.curr_generation[y + 1][x],
+                self.curr_generation[y + 1][x + 1],
+                self.curr_generation[y - 1][x],
+                self.curr_generation[y - 1][x + 1],
+            ]
         if x == len(self.curr_generation[0]) - 1 and 0 < y < len(self.curr_generation) - 1:
-            sosedi = [self.curr_generation[y][x - 1], self.curr_generation[y + 1][x], self.curr_generation[y + 1][x - 1], self.curr_generation[y - 1][x],
-                      self.curr_generation[y - 1][x - 1]]
+            sosedi = [
+                self.curr_generation[y][x - 1],
+                self.curr_generation[y + 1][x],
+                self.curr_generation[y + 1][x - 1],
+                self.curr_generation[y - 1][x],
+                self.curr_generation[y - 1][x - 1],
+            ]
         if 0 < x < len(self.curr_generation[0]) - 1 and 0 < y < len(self.curr_generation) - 1:
             for i in (-1, 0, 1):
                 for j in (-1, 0, 1):
@@ -133,7 +169,6 @@ class GameOfLife:
         igra = GameOfLife((len(grid), len(grid[0])))
         igra.curr_generation = grid
         return igra
-
 
     def save(self, filename: pathlib.Path) -> None:
         """

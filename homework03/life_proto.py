@@ -33,14 +33,14 @@ class GameOfLife:
         self.grid = []
 
     def draw_lines(self) -> None:
-        """ Отрисовать сетку """
+        """Отрисовать сетку"""
         for x in range(0, self.width, self.cell_size):
             pygame.draw.line(self.screen, pygame.Color("black"), (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
             pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
 
     def run(self) -> None:
-        """ Запустить игру """
+        """Запустить игру"""
         pygame.init()
         clock = pygame.time.Clock()
         pygame.display.set_caption("Game of Life")
@@ -100,12 +100,11 @@ class GameOfLife:
         """
         for i in range(len(self.grid)):
             for j in range(len(self.grid[0])):
-                rect = (j*self.cell_size, i*self.cell_size, self.cell_size, self.cell_size)
+                rect = (j * self.cell_size, i * self.cell_size, self.cell_size, self.cell_size)
                 if self.grid[i][j] == 0:
-                    pygame.draw.rect(self.screen, pygame.Color('white'), rect)
+                    pygame.draw.rect(self.screen, pygame.Color("white"), rect)
                 else:
-                    pygame.draw.rect(self.screen, pygame.Color('green'), rect)
-
+                    pygame.draw.rect(self.screen, pygame.Color("green"), rect)
 
     def get_neighbours(self, cell: Cell) -> Cells:
         """
@@ -130,23 +129,43 @@ class GameOfLife:
         if x == 0 and y == 0:
             sosedi = [self.grid[y][x + 1], self.grid[y + 1][x], self.grid[y + 1][x + 1]]
         if 0 < x < len(self.grid[0]) - 1 and y == 0:
-            sosedi = [self.grid[y][x + 1], self.grid[y + 1][x], self.grid[y + 1][x + 1], self.grid[y][x - 1],
-                      self.grid[y + 1][x - 1]]
+            sosedi = [
+                self.grid[y][x + 1],
+                self.grid[y + 1][x],
+                self.grid[y + 1][x + 1],
+                self.grid[y][x - 1],
+                self.grid[y + 1][x - 1],
+            ]
         if x == len(self.grid[0]) - 1 and y == 0:
             sosedi = [self.grid[y][x - 1], self.grid[y + 1][x], self.grid[y + 1][x - 1]]
         if 0 < x < len(self.grid[0]) - 1 and y == len(self.grid) - 1:
-            sosedi = [self.grid[y][x + 1], self.grid[y - 1][x], self.grid[y - 1][x + 1], self.grid[y][x - 1],
-                      self.grid[y - 1][x - 1]]
+            sosedi = [
+                self.grid[y][x + 1],
+                self.grid[y - 1][x],
+                self.grid[y - 1][x + 1],
+                self.grid[y][x - 1],
+                self.grid[y - 1][x - 1],
+            ]
         if x == 0 and y == len(self.grid) - 1:
             sosedi = [self.grid[y][x + 1], self.grid[y - 1][x], self.grid[y - 1][x + 1]]
         if x == len(self.grid[0]) - 1 and y == len(self.grid) - 1:
             sosedi = [self.grid[y][x - 1], self.grid[y - 1][x], self.grid[y - 1][x - 1]]
         if x == 0 and 0 < y < len(self.grid) - 1:
-            sosedi = [self.grid[y][x + 1], self.grid[y + 1][x], self.grid[y + 1][x + 1], self.grid[y - 1][x],
-                      self.grid[y - 1][x + 1]]
+            sosedi = [
+                self.grid[y][x + 1],
+                self.grid[y + 1][x],
+                self.grid[y + 1][x + 1],
+                self.grid[y - 1][x],
+                self.grid[y - 1][x + 1],
+            ]
         if x == len(self.grid[0]) - 1 and 0 < y < len(self.grid) - 1:
-            sosedi = [self.grid[y][x - 1], self.grid[y + 1][x], self.grid[y + 1][x - 1], self.grid[y - 1][x],
-                      self.grid[y - 1][x - 1]]
+            sosedi = [
+                self.grid[y][x - 1],
+                self.grid[y + 1][x],
+                self.grid[y + 1][x - 1],
+                self.grid[y - 1][x],
+                self.grid[y - 1][x - 1],
+            ]
         if 0 < x < len(self.grid[0]) - 1 and 0 < y < len(self.grid) - 1:
             for i in (-1, 0, 1):
                 for j in (-1, 0, 1):
@@ -176,6 +195,3 @@ class GameOfLife:
                         pokolenie[i][j] = 1
 
         return pokolenie
-
-game = GameOfLife(320, 240, 40, 1)
-game.run()
