@@ -33,9 +33,9 @@ def get_friends(
     v = config.VK_CONFIG["version"]
     sfile = Session(config.VK_CONFIG["domain"])
     if fields:
-        fields = ",".join(fields)
+        fields = ",".join(fields)  # type: ignore
     else:
-        fields = ""
+        fields = ""  # type: ignore
     url = f"friends.get?access_token={access_token}&user_id={user_id}&count={count}&offset={offset}&fields={fields}&v={v}"
     otvet = sfile.get(url)
     otvet1 = FriendsResponse(otvet.json()["response"]["count"], otvet.json()["response"]["items"])
