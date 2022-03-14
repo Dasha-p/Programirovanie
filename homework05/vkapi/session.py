@@ -1,6 +1,6 @@
 import typing as tp
 
-import requests #для отправления запросов на сайт
+import requests  # для отправления запросов на сайт
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
@@ -28,18 +28,23 @@ class Session:
         errors = []
         for i in range(400, 600):
             errors.append(i)
-        retry = Retry(method_whitelist=["POST","GET"], total=max_retries, backoff_factor=backoff_factor, status_forcelist=errors)
+        retry = Retry(
+            method_whitelist=["POST", "GET"],
+            total=max_retries,
+            backoff_factor=backoff_factor,
+            status_forcelist=errors,
+        )
         adapter = HTTPAdapter(max_retries=retry)
         self.session.mount("https://", adapter)
 
     def get(self, url: str, *args: tp.Any, **kwargs: tp.Any) -> requests.Response:
         if "timeout" in kwargs:
-            self.timeout = kwargs['timeout']
+            self.timeout = kwargs["timeout"]
         resp = self.session.get(self.base_url + "/" + url, timeout=self.timeout, *args, **kwargs)
         return resp
 
     def post(self, url: str, *args: tp.Any, **kwargs: tp.Any) -> requests.Response:
         if "timeout" in kwargs:
-            self.timeout = kwargs['timeout']
+            self.timeout = kwargs["timeout"]
         resp = self.session.post(self.base_url + "/" + url, timeout=self.timeout, *args, **kwargs)
         return resp
