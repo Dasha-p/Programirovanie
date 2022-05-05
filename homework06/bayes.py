@@ -1,12 +1,13 @@
+import csv
+import random
 import string
 from collections import Counter, defaultdict
 from math import log
-import csv
-import random
+
 from db import News, session
 
-class NaiveBayesClassifier:
 
+class NaiveBayesClassifier:
     def __init__(self, alpha):
         self.alpha = alpha
         self.counters = defaultdict(lambda: defaultdict(int))
@@ -15,7 +16,7 @@ class NaiveBayesClassifier:
         self.words_count = 0
 
     def fit(self, X, y):
-        """ Fit Naive Bayes classifier according to X, y. """
+        """Fit Naive Bayes classifier according to X, y."""
         for xi, yi in zip(X, y):
             self.class_counter[yi] += 1
             for word in xi.split():
@@ -24,7 +25,7 @@ class NaiveBayesClassifier:
                 self.words_count += 1
 
     def predict(self, X):
-        """ Perform classification on an array of test vectors X. """
+        """Perform classification on an array of test vectors X."""
         predicted = []
         for string in X:
             predicted.append(self._predict_class(string))
@@ -51,25 +52,26 @@ class NaiveBayesClassifier:
         return class_ind
 
     def score(self, X_test, y_test):
-        """ Returns the mean accuracy on the given test data and labels. """
+        """Returns the mean accuracy on the given test data and labels."""
         results = self.predict(X_test)
         return sum(y_test[it] == results[it] for it in range(len(y_test))) / len(y_test)
+
 
 def clean(s):
     translator = str.maketrans("", "", string.punctuation)
     return s.translate(translator)
 
+
 def label_news():
     s = session()
     rows = s.query(News).filter(News.label == None).all()
     for row in rows:
-        row.label = random.choice(['good', 'maybe', 'never'])
+        row.label = random.choice(["good", "maybe", "never"])
         s.add(row)
         s.commit()
 
 
-
-if __name__=="__main__":
+if __name__ == "__main__":
     with open("data/SMSSpamCollection") as f:
         data = list(csv.reader(f, delimiter="\t"))
     X, y = [], []
