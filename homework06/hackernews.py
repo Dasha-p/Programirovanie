@@ -1,26 +1,23 @@
 import sqlalchemy.exc
-from bottle import (
-    route, run, template, request, redirect
-)
+from bottle import redirect, request, route, run, template
 
-from scraputils import get_news
-from db import News, session
 from bayes import NaiveBayesClassifier, label_news
-
+from db import News, session
+from scraputils import get_news
 
 
 @route("/news")
 def news_list():
     s = session()
     rows = s.query(News).filter(News.label == None).all()
-    return template('news_template', rows=rows)
+    return template("news_template", rows=rows)
 
 
-@route("/add_label/", method='GET')
+@route("/add_label/", method="GET")
 def add_label():
     s = session()
-    label = request.GET.get('label', '')
-    id = int(request.GET.get('id', ''))
+    label = request.GET.get("label", "")
+    id = int(request.GET.get("id", ""))
     row = s.query(News).filter(News.id == id).one()
     row.label = label
     s.add(row)
@@ -35,19 +32,18 @@ def update_news():
     lst = get_news(url)
     for dic in lst:
         try:
-            s.query(News).filter(News.title == dic['title']).one()
+            s.query(News).filter(News.title == dic["title"]).one()
         except sqlalchemy.exc.NoResultFound:
             new = News(
-                title=dic['title'],
-                author=dic['author'],
-                url=dic['url'],
-                comments=dic['comments'],
-                points=dic['points']
+                title=dic["title"],
+                author=dic["author"],
+                url=dic["url"],
+                comments=dic["comments"],
+                points=dic["points"],
             )
             s.add(new)
             s.commit()
     redirect("/news")
-
 
 
 @route("/classify")
@@ -58,4 +54,3 @@ def classify_news():
 
 if __name__ == "__main__":
     run(host="localhost", port=8080)
-
