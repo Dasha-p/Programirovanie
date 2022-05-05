@@ -1,9 +1,9 @@
 # mypy: ignore-errors
+from scraputils import get_news
 from sqlalchemy import Column, Integer, String, create_engine  # mypy: ignore
 from sqlalchemy.ext.declarative import declarative_base  # mypy: ignore
 from sqlalchemy.orm import sessionmaker  # mypy: ignore
 
-from scraputils import get_news
 
 
 def create_database(lst):
