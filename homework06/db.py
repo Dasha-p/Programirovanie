@@ -5,7 +5,6 @@ from sqlalchemy.ext.declarative import declarative_base  # mypy: ignore
 from sqlalchemy.orm import sessionmaker  # mypy: ignore
 
 
-
 def create_database(lst):
     s = session()
     slovar_nov = {"title": "None", "url": "None", "author": "None", "points": 0, "comments": 0}
